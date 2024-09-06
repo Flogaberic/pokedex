@@ -25,6 +25,11 @@ class Pokemon extends Model implements TranslatableContract
       return $this->hasMany(PokemonVariety::class);
     }
 
+    public function user()
+    {
+      return $this->hasOne(PokemonUser::class);
+    }
+
     public function catchByUsers()
     {
       return $this->belongsToMany(User::class);

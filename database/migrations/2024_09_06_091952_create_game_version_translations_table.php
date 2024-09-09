@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('game_version_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('game_version_id');
+            $table->foreignIdFor(App\Models\GameVersion::class)->constrained()->onDelete('cascade');
             $table->string('locale');
             $table->string('name');
         });

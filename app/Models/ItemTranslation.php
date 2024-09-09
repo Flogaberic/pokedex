@@ -9,4 +9,6 @@ class ItemTranslation extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name', 'description'];
+
 }

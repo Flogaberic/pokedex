@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('moves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('accuracy');
-            $table->unsignedBigInteger('move_damage_class_id');
+            $table->foreignIdFor(App\Models\MoveDamageClass::class)->constrained()->onDelete('cascade');
             $table->integer('power');
             $table->integer('pp');
             $table->integer('priority');
-            $table->unsignedBigInteger('type_id');
+            $table->foreignIdFor(App\Models\Type::class)->constrained()->onDelete('cascade');
+
         });
     }
 

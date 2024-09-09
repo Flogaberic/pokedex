@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ability_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('ability_id');
+            $table->foreignIdFor(App\Models\Ability::class)->constrained()->onDelete('cascade');
             $table->string('locale');
             $table->string('name');
             $table->string('description');

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pokemon_learn_moves', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pokemon_variety_id');
-            $table->unsignedBigInteger('move_id');
-            $table->unsignedBigInteger('move_learn_method_id');
+            $table->foreignIdFor(App\Models\PokemonVariety::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Move::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\MoveLearnMethod::class)->constrained()->onDelete('cascade');
             $table->integer('level');
         });
     }

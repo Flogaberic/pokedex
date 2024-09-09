@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GameVersionTranslation extends Model
 {
     use HasFactory;
+
+    public $fillable = ['name'];
+
 }

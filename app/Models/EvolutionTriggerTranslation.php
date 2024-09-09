@@ -9,5 +9,5 @@ class EvolutionTriggerTranslation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'locale'];
+    public $fillable = ['name'];
 }

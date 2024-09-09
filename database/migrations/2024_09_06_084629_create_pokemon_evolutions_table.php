@@ -13,25 +13,27 @@ return new class extends Migration
     {
         Schema::create('pokemon_evolutions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pokemon_variety_id');
-            $table->unsignedBigInteger('evolves_to_id');
+            $table->foreignIdFor(App\Models\PokemonVariety::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\PokemonVariety::class, 'evolves_to_id')->constrained()->onDelete('cascade');
             $table->boolean('gender');
-            $table->unsignedBigInteger('held_item_id');
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('know_move_id');
-            $table->unsignedBigInteger('know_move_type_id');
+            $table->foreignIdFor(App\Models\Item::class, 'held_item_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Item::class, 'item_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Move::class, 'known_move')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Type::class, 'known_move_type_id')->constrained()->onDelete('cascade');
             $table->string('location');
             $table->integer('min_affection');
             $table->integer('min_happiness');
             $table->integer('min_level');
             $table->boolean('need_overworld_rain');
-            $table->unsignedBigInteger('party_species_id');
-            $table->unsignedBigInteger('party_type_id');
+            $table->foreignIdFor(App\Models\Pokemon::class, 'party_species_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Type::class, 'party_type_id')->constrained()->onDelete('cascade');
             $table->integer('relative_physical_stats');
             $table->string('time_of_day');
             $table->unsignedBigInteger('trade_species_id');
+            $table->foreignIdFor(App\Models\Pokemon::class, 'trade_species_id')->constrained()->onDelete('cascade');
             $table->boolean('turn_upside_down');
-            $table->unsignedBigInteger('evolution_trigger_id');
+            $table->foreignIdFor(App\Models\EvolutionTrigger::class)->constrained()->onDelete('cascade');
+
         });
     }
 

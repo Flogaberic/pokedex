@@ -9,7 +9,7 @@ class AbilityTranslation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['locale', 'name', 'description', 'effect'];
+    protected $fillable = ['name', 'description'];
 
     public function ability()
     {

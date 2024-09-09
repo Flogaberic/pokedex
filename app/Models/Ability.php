@@ -13,8 +13,8 @@ class Ability extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name', 'description'];
 
-    public function pokemonVarietySprite()
+    public function pokemonVarieties()
     {
-      return $this->belongsToMany(PokemonVarietySprite::class);
+      return $this->belongsToMany(PokemonVariety::class);
     }
 }

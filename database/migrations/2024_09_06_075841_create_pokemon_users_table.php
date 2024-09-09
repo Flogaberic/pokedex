@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pokemon_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pokemon_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignIdFor(App\Models\Pokemon::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\User::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('move_translations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('move_id');
+            $table->string('locale');
+            $table->string('name');
+            $table->string('description');
         });
     }
 

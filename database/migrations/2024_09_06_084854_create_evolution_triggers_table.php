@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('evolution_triggers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->string('slug');
         });
     }
 

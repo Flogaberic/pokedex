@@ -19,10 +19,19 @@ class PokemonVariety extends Model implements TranslatableContract
     return $this->belongsTo(Pokemon::class);
     }
 
-
     public function sprites()
     {
         return $this->hasOne(PokemonVarietySprite::class);
+    }
+
+    public function pokemonVariety()
+    {
+        return $this->hasOne(AbilityPokemonVariety::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsToMany(Type::class);
     }
 
     protected $fillable = ['pokemon_id', 'is_default', 'cry_url', 'height', 'weight', 'base_experience', 'base_stats_hp', 'base_stats_attack', 'base_stats_defense', 'base_stats_special_attack', 'base_stats_special_defense', 'base_stats_speed'];

@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('evolution_trigger_translations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('evolution_trigger_id');
+            $table->string('locale');
+            $table->string('name');
         });
     }
 

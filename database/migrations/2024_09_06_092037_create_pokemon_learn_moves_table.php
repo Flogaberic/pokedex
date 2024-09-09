@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pokemon_learn_moves', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('pokemon_variety_id');
+            $table->unsignedBigInteger('move_id');
+            $table->unsignedBigInteger('move_learn_method_id');
+            $table->integer('level');
         });
     }
 

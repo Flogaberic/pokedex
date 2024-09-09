@@ -4,8 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class GameVersion extends Model
+class GameVersion extends Model implements TranslatableContract
 {
-    use HasFactory;
+    use HasFactory, Translatable;
+
+    public $translatedAttributes = ['name'];
+
+    protected $fillable = ['generic_name'];
+
+    public function pokemonLearnMove()
+    {
+      return $this->hasMany(PokemonLearnMove::class);
+    }
 }

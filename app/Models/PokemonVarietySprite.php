@@ -14,6 +14,11 @@ class PokemonVarietySprite extends Model
     return $this->belongsTo(PokemonVariety::class);
     }
 
+    public function ability()
+    {
+      return $this->belongsToMany(Ability::class);
+    }
+
     protected $fillable = [
         'artwork_url',
         'artwork_shiny_url',

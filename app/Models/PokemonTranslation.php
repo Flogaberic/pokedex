@@ -9,5 +9,4 @@ class PokemonTranslation extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['name', 'category'];
 }

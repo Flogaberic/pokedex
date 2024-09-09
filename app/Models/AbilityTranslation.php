@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class AbilityTranslation extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['locale', 'name', 'description', 'effect'];
+
+    public function ability()
+    {
+      return $this->belongsTo(Ability::class);
+    }
 }

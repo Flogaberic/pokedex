@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_versions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->string('generic_name');
+            $table->integer('generation');
         });
     }
 

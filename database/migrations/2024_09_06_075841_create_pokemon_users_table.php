@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pokemon_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('pokemon_id');
-            $table->bigIncrements('user_id');
+            $table->unsignedBigInteger('pokemon_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

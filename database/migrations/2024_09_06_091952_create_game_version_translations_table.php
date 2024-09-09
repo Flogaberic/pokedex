@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_version_translations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('game_version_id');
+            $table->string('locale');
+            $table->string('name');
         });
     }
 

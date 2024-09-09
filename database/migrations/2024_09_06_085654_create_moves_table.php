@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('moves', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->integer('accuracy');
+            $table->unsignedBigInteger('move_damage_class_id');
+            $table->integer('power');
+            $table->integer('pp');
+            $table->integer('priority');
+            $table->unsignedBigInteger('type_id');
         });
     }
 

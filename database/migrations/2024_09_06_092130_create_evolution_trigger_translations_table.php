@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(App\Models\EvolutionTrigger::class)->constrained()->onDelete('cascade');
             $table->string('locale');
             $table->string('name');
+            $table->timestamps();
         });
     }
 

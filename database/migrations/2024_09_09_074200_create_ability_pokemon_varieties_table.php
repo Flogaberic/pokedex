@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('pokemon_variety_id')->constrained()->onDelete('cascade');
             $table->boolean('id_hidden');
             $table->integer('slot');
+            $table->timestamps();
         });
     }
 

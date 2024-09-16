@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('generic_name');
             $table->integer('generation');
+            $table->timestamps();
         });
     }
 

@@ -11,6 +11,8 @@ class Type extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
+    public $translatedAttributes = ['name'];
+
     public function pokemonEvolution()
     {
         return $this->hasMany(PokemonEvolution::class);

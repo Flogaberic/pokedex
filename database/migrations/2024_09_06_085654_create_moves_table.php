@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('pp');
             $table->integer('priority');
             $table->foreignIdFor(App\Models\Type::class)->constrained()->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
 

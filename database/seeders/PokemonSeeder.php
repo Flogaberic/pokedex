@@ -468,6 +468,7 @@ class PokemonSeeder extends Seeder
         });
     }
 
+    /*
     public function seedItems()
     {
         $this->getClass('item', function ($url) {
@@ -492,7 +493,7 @@ class PokemonSeeder extends Seeder
                 ]);
             });
         });
-    }
+    }*/
 
     public function seedPokemon(){
         $this->getClass('pokemon-species', function ($url) {

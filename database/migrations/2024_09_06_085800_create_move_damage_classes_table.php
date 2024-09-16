@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('move_damage_classes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->timestamps();
         });
     }
 

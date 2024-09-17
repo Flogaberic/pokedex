@@ -25,6 +25,8 @@ class Type extends Model implements TranslatableContract
 
     public function pokemonVariety()
     {
-        return $this->belongsToMany(PokemonVariety::class);
+        return $this->belongsToMany(PokemonVariety::class, 'pokemon_variety_type')
+                    ->withPivot('is_hidden', 'slot')
+                    ->withTimestamps();
     }
 }

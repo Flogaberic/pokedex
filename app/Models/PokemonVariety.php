@@ -24,14 +24,18 @@ class PokemonVariety extends Model implements TranslatableContract
         return $this->hasOne(PokemonVarietySprite::class);
     }
 
-    public function pokemonVariety()
+    public function abilities()
     {
-        return $this->hasOne(AbilityPokemonVariety::class);
+        return $this->belongsToMany(Ability::class, 'ability_pokemon_variety')
+                    ->withPivot('is_hidden', 'slot')
+                    ->withTimestamps();
     }
 
-    public function type()
+    public function types()
     {
-        return $this->belongsToMany(Type::class);
+        return $this->belongsToMany(Type::class, 'pokemon_variety_type')
+                    ->withPivot('is_hidden', 'slot')
+                    ->withTimestamps();
     }
 
     protected $fillable = ['pokemon_id', 'is_default', 'cry_url', 'height', 'weight', 'base_experience', 'base_stats_hp', 'base_stats_attack', 'base_stats_defense', 'base_stats_special_attack', 'base_stats_special_defense', 'base_stats_speed'];

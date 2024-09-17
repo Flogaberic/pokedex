@@ -9,30 +9,30 @@ return new class extends Migration
     /**
      * Run the migrations.
      */ 
-   public function up(): void 
+    public function up(): void
     {
         Schema::create('pokemon_evolutions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignIdFor(App\Models\PokemonVariety::class, 'pokemon_variety_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(App\Models\PokemonVariety::class, 'evolves_to_id')->constrained()->onDelete('cascade');
-            $table->boolean('gender');
-            $table->foreignIdFor(App\Models\Item::class, 'held_item_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(App\Models\Item::class, 'item_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(App\Models\Move::class, 'known_move')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(App\Models\Type::class, 'known_move_type_id')->constrained()->onDelete('cascade');
-            $table->string('location');
-            $table->integer('min_affection');
-            $table->integer('min_happiness');
-            $table->integer('min_level');
-            $table->boolean('needs_overworld_rain');
-            $table->foreignIdFor(App\Models\Pokemon::class, 'party_species_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(App\Models\Type::class, 'party_type_id')->constrained()->onDelete('cascade');
-            $table->integer('relative_physical_stats');
-            $table->string('time_of_day');
-            $table->foreignIdFor(App\Models\Pokemon::class, 'trade_species_id')->constrained()->onDelete('cascade');
-            $table->boolean('turn_upside_down');
-            $table->foreignIdFor(App\Models\EvolutionTrigger::class)->constrained()->onDelete('cascade');
-            $table->timestamps();
+            $table->id(); // Clé primaire bigInt auto-incrémentée
+            $table->foreignId('pokemon_variety_id')->constrained('pokemon_varieties')->onDelete('cascade'); // Clé étrangère vers pokemon_varieties
+            $table->foreignId('evolves_to_id')->constrained('pokemon_varieties')->onDelete('cascade'); // Clé étrangère vers pokemon_varieties
+            $table->boolean('gender')->nullable(); // Genre (nullable)
+            $table->foreignId('held_item_id')->nullable()->constrained('items')->onDelete('set null'); // Clé étrangère vers items (nullable)
+            $table->foreignId('item_id')->nullable()->constrained('items')->onDelete('set null'); // Clé étrangère vers items (nullable)
+            $table->foreignId('known_move_id')->nullable()->constrained('moves')->onDelete('set null'); // Clé étrangère vers moves (nullable)
+            $table->foreignId('known_move_type_id')->nullable()->constrained('types')->onDelete('set null'); // Clé étrangère vers types (nullable)
+            $table->string('location')->nullable(); // Localisation (nullable)
+            $table->integer('min_affection')->nullable(); // Affection minimale (nullable)
+            $table->integer('min_happiness')->nullable(); // Bonheur minimal (nullable)
+            $table->integer('min_level')->nullable(); // Niveau minimal (nullable)
+            $table->boolean('needs_overworld_rain')->default(false); // Pluie nécessaire dans le monde (default false)
+            $table->foreignId('party_species_id')->nullable()->constrained('pokemon')->onDelete('set null'); // Clé étrangère vers pokemons (nullable)
+            $table->foreignId('party_type_id')->nullable()->constrained('types')->onDelete('set null'); // Clé étrangère vers types (nullable)
+            $table->integer('relative_physical_stats')->nullable(); // Statistiques physiques relatives (nullable)
+            $table->string('time_of_day')->nullable(); // Heure de la journée (nullable)
+            $table->foreignId('trade_species_id')->nullable()->constrained('pokemon')->onDelete('set null'); // Clé étrangère vers pokemons (nullable)
+            $table->boolean('turn_upside_down')->default(false); // Inverser (default false)
+            $table->foreignId('evolution_trigger_id')->constrained('evolution_triggers')->onDelete('cascade'); // Clé étrangère vers evolution_triggers
+            $table->timestamps(); // Pour les colonnes created_at et updated_at
         });
     }
 

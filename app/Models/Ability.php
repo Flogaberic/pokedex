@@ -15,6 +15,8 @@ class Ability extends Model implements TranslatableContract
 
     public function pokemonVarieties()
     {
-      return $this->belongsToMany(PokemonVariety::class);
+      return $this->belongsToMany(PokemonVariety::class, 'ability_pokemon_variety')
+                  ->withPivot('is_hidden', 'slot')
+                  ->withTimestamps();
     }
 }

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ability_pokemon_varieties', function (Blueprint $table) {
+        Schema::create('pokemon_variety_type', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('ability_id')->constrained()->onDelete('cascade');
-            $table->foreignId('pokemon_variety_id')->constrained()->onDelete('cascade');
-            $table->boolean('id_hidden');
             $table->integer('slot');
+            $table->foreignId('pokemon_variety_id')->constrained('pokemon_varieties')->onDelete('cascade');
+            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ability_pokemon_varieties');
+        Schema::dropIfExists('pokemon_variety_type');
     }
 };

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('item_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(App\Models\Item::class)->constrained()->onDelete('cascade');
+            $table->string('locale');
+            $table->string('name');
             $table->timestamps();
         });
     }

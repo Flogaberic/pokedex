@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignIdFor(App\Models\Ability::class)->constrained()->onDelete('cascade');
             $table->string('locale');
             $table->string('name');
-            $table->string('description');
-            $table->text('effect');
+            $table->string('description')->nullable();
+            $table->text('effect')->nullable();
             $table->timestamps();
         });
     }

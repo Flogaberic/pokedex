@@ -27,14 +27,14 @@ class PokemonVariety extends Model implements TranslatableContract
     public function abilities()
     {
         return $this->belongsToMany(Ability::class, 'ability_pokemon_variety')
-                    ->withPivot('is_hidden', 'slot')
+                    ->withPivot('is_hidden')
                     ->withTimestamps();
     }
 
     public function types()
     {
         return $this->belongsToMany(Type::class, 'pokemon_variety_type')
-                    ->withPivot('is_hidden', 'slot')
+                    ->withPivot('is_hidden')
                     ->withTimestamps();
     }
 

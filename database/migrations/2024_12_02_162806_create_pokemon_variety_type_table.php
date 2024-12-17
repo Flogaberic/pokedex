@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('pokemon_variety_type', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('is_hidden')->default(false);
+            $table->integer('slot');
+            $table->boolean('is_hidden')->nullable();
             $table->foreignId('pokemon_variety_id')->constrained('pokemon_varieties')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->timestamps();

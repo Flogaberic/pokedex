@@ -9,6 +9,7 @@ use App\Models\TypeInteraction;
 use App\Models\Item;
 use App\Models\PokemonEvolution;
 use App\Models\PokemonVariety;
+use App\Models\PokemonLearnMove;
 use App\Models\Ability;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,30 @@ class PokemonController extends Controller
             ->firstOrFail(['id', 'power', 'accuracy', 'pp', 'move_damage_class_id', 'priority', 'type_id']);
     }
 
+    public function showPokemonLearnMoves()
+    {
+        $moves = PokemonLearnMove::with('move') // Charge la relation avec 'move'
+            ->select(['id', 'pokemon_variety_id', 'move_id', 'move_learn_method_id', 'level', 'game_version_id'])
+            ->get();
+
+        return response()->json($moves);
+    }
+
+    
+
+    public function showPokemonLearnMovesById($id)
+    {
+        $movesId = PokemonLearnMove::with('move')
+            ->where('pokemon_variety_id', $id)
+            ->groupBy('move_id')
+            ->select(['id', 'pokemon_variety_id', 'move_id', 'move_learn_method_id', 'level', 'game_version_id'])
+            ->get();
+        
+        return response()->json($movesId);
+
+    }
+    
+
     public function showTypes()
     {
         return Type::withTranslation()->get(['id', 'sprite_url']);
@@ -62,8 +87,9 @@ class PokemonController extends Controller
 
     public function showTypesInteractionsById($id)
     {
-        return TypeInteraction::get()
-            ->where('from_type_id', $id);
+        return TypeInteraction::with(['type', 'typecible', 'typeInteractionState'])
+            ->where('from_type_id', $id)
+            ->get();
     }
 
     public function showItems()
@@ -90,8 +116,13 @@ class PokemonController extends Controller
     }  
 
     public function showEvolutionsById($id){
-        return PokemonEvolution::select()
-            ->where('id', $id)
+        return PokemonEvolution::with([
+            'pokemonVariety', 
+            'pokemonVariety.sprites', 
+            'evolvesTo', 
+            'evolvesTo.sprites' 
+        ])
+            ->where('pokemon_variety_id', $id)
             ->firstOrFail(['id', 'pokemon_variety_id', 'evolves_to_id', 'gender', 'held_item_id', 'item_id', 'known_move_id', 'known_move_type_id', 'location', 'min_affection', 'min_happiness', 'min_level', 'needs_overworld_rain', 'party_species_id', 'party_type_id', 'relative_physical_stats', 'time_of_day', 'trade_species_id', 'turn_upside_down', 'evolution_trigger_id']);
     }
 

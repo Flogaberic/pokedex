@@ -11,7 +11,12 @@ class TypeInteraction extends Model
 
     public function type()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'from_type_id');
+    }
+
+    public function typecible()
+    {
+        return $this->belongsTo(Type::class, 'to_type_id');
     }
 
     public function typeInteractionState()

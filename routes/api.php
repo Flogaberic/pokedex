@@ -34,6 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [PokemonController::class, 'showMoveById']);
     });
 
+    Route::group(['prefix' => 'learn_move'], function (){
+        Route::get('/', [PokemonController::class, 'showPokemonLearnMoves']);
+        Route::get('/{id}', [PokemonController::class, 'showPokemonLearnMovesById']);
+    });
+
     Route::group(['prefix' => 'ability'], function (){
         Route::get('/', [PokemonController::class, 'showAbilities']);
         Route::get('/{id}', [PokemonController::class, 'showAbilitiesByPokemonId']);
@@ -56,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'type_interactions'], function (){
         Route::get('/', [PokemonController::class, 'showTypesInteractions']);
-        Route::get('/{id}', [PokemonController::class, 'showTypesInteractionsyId']);
+        Route::get('/{id}', [PokemonController::class, 'showTypesInteractionsById']);
     });
     
     Route::group(['prefix' => 'item'], function (){

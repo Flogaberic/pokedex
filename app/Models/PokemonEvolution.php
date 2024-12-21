@@ -16,6 +16,11 @@ class PokemonEvolution extends Model
       return $this->belongsTo(PokemonVariety::class);
     }
 
+    public function evolvesTo()
+    {
+        return $this->belongsTo(PokemonVariety::class, 'evolves_to_id');
+    }
+
     public function item()
     {
       return $this->belongsTo(Item::class);
